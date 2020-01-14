@@ -1,0 +1,11 @@
+{
+  "name": "full-stack-chat",
+  "version": "0.0.1",
+  "description": "full stack chat test",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}
