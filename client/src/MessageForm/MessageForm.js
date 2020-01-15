@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import io from 'socket.io-client';
 
 
 const MessageForm = props => {
 
-  const socket = io('http://localhost:3000');
+  const socket = io('localhost:8080');
+
+  useEffect(() => {
+    socket.on('message', msg => {
+      props.setMessages([msg, ...props.messages]);
+    });
+  }, [props.messages])
+
 
   const saveMessage = (e) => {
     e.preventDefault();
     socket.emit('message', e.target.msg.value);
-    const msgs = props.messages;
-    msgs.push(e.target.msg.value);
-
-    props.setMessages(msgs);
     console.log(props.messages);
+    e.target.msg.value = '';
   }
 
   return (
