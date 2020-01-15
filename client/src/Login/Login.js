@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import UserContext from '../context/UserContext';
 
 
-const Login = ({ users, setUsers, nickname, setNickname }) => {
+const Login = ({ users, setUsers }) => {
+
+  const [isLog, setIsLog] = useState(false);
+  const userContext = useContext(UserContext);
 
   const saveUser = e => {
     let usersList = users;
     usersList.push(e.target.user.value);
-    setNickname(e.target.user.value);
+    userContext.setUser({ nickname: e.target.user.value, isLogged: true });
     setUsers(usersList);
+    setIsLog(true);
+    console.log('login', userContext.nickname);
   }
 
   return (
     <>
       {
-        nickname
+        isLog
           ? (
             <Redirect
               to={{
                 pathname: '/chat',
-                state: { nickname: nickname }
+                state: { nickname: userContext.user.nickname }
               }}
             />
           ) : (
