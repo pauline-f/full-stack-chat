@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import MessageForm from './MessageForm'
+import MessageForm from './MessageForm';
+import ListMessages from './ListMessages';
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
 
   return (
     <div className="App">
+      <ListMessages messages={messages} />
       <MessageForm messages={messages} setMessages={setMessages} />
     </div>
   );
