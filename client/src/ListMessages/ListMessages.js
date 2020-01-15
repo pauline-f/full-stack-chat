@@ -2,11 +2,11 @@ import React from 'react';
 import Message from '../Message';
 
 
-const ListMessages = props => {
+const ListMessages = ({ messages }) => {
   
   return (
     <div>
-      {props.messages.map((message, i) => <Message key={i} message={message} />)}
+      {messages.map((message, i) => <Message key={i} message={message} />)}
     </div>
   );
 };
