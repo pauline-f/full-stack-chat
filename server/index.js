@@ -5,11 +5,12 @@ const io = require('socket.io')(http);
 const bodyParser = require('body-parser');
 
 const users = [];
+let nickname = '';
 
 app.use(bodyParser.json());
 
 app.post('/api/user', (req, res) => {
-  const nickname = req.body.nickname;
+  nickname = req.body.nickname;
   console.log(nickname);
   if (nickname) {
     if (users.includes(nickname)) {
@@ -30,9 +31,14 @@ app.get('/api/user', (req, res) => {
 });
 
 io.on('connection', socket => {
-  console.log('a user connected');
+  console.log(`${nickname} connected`);
   socket.on('disconnect', function () {
-    console.log('user disconnected');
+    const searchNickname = (element) => element === nickname;
+    if (users.findIndex(searchNickname) >= 0) {
+      users.splice(users.findIndex(searchNickname), 1);
+      console.log(`${nickname} disconnected`);
+    }
+    console.log(users);
   });
   socket.on('message', msg => {
     io.emit('message', msg);
