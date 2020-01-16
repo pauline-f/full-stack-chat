@@ -8,7 +8,7 @@ const MessageForm = ({messages, setMessages, nickname}) => {
 
   useEffect(() => {
     socket.on('message', msg => {
-      setMessages([msg, ...messages]);
+      setMessages([...messages, msg]);
     });
   }, [messages])
 
