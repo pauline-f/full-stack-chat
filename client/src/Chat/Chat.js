@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import MessageForm from '../MessageForm';
 import ListMessages from '../ListMessages';
 import UserContext from '../context/UserContext';
@@ -16,14 +17,25 @@ const Chat = ({ messages, setMessages, users, setUsers }) => {
 
   return (
     <div>
-      <h1>Chat</h1>
-      {userContext.user.nickname}
-      <ListMessages messages={messages} />
-      <MessageForm messages={messages} setMessages={setMessages} />
-      <div>
-        <h2>Connected people</h2>
-        {users}
-      </div>
+      {userContext.user ? (
+        <div>
+          <h1>Chat</h1>
+          <h2>{userContext.user.nickname}</h2>
+          <ListMessages messages={messages} />
+          <MessageForm messages={messages} setMessages={setMessages} />
+          <div>
+            <h2>Connected people</h2>
+            {users}
+          </div>
+        </div>
+      ) : (
+          <Redirect
+            to={{
+              pathname: '/login'
+            }}
+          />
+        )}
+
     </div>
   );
 };
