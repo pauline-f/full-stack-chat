@@ -18,8 +18,8 @@ function App() {
       <div className="App">
 
         <BrowserRouter>
-          <Route path='/login' render={() => <Login component={Login} users={users} setUsers={setUsers} />} />
-          <Route path='/chat' render={() => <Chat component={Chat} messages={messages} setMessages={setMessages} />} />
+          <Route path='/login' render={() => <Login component={Login} />} />
+          <Route path='/chat' render={() => <Chat component={Chat} messages={messages} setMessages={setMessages} users={users} setUsers={setUsers} />} />
         </BrowserRouter>
 
       </div>

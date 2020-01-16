@@ -14,12 +14,9 @@ const Login = ({ users, setUsers }) => {
     e.persist();
 
     try {
-      let usersList = users;
       const result = await addUser({ nickname: e.target.user.value, isLogged: true });
       if (result.status === 200) {
         userContext.setUser({ nickname: e.target.user.value, isLogged: true });
-        usersList.push(e.target.user.value);
-        setUsers(usersList);
         setIsLog(true);
         console.log('Success, the user is connected');
       } else {
@@ -33,7 +30,6 @@ const Login = ({ users, setUsers }) => {
       console.error('Error:', error);
     }
     console.log('login', userContext.user);
-    console.log(users);
   }
 
   return (

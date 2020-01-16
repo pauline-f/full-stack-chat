@@ -10,8 +10,7 @@ const MessageForm = ({messages, setMessages, nickname}) => {
     socket.on('message', msg => {
       setMessages([...messages, msg]);
     });
-  }, [messages])
-
+  }, [messages]);
 
   const sendMessage = (e) => {
     e.preventDefault();

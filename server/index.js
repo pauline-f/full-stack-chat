@@ -23,7 +23,11 @@ app.post('/api/user', (req, res) => {
     res.sendStatus(400);
   }
   console.log(users);
-})
+});
+
+app.get('/api/user', (req, res) => {
+  res.send(users);
+});
 
 io.on('connection', socket => {
   console.log('a user connected');
