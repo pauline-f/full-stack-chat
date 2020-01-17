@@ -24,7 +24,7 @@ const Chat = ({ messages, setMessages, users, setUsers }) => {
           <ListMessages messages={messages} />
           <MessageForm messages={messages} setMessages={setMessages} />
           <div>
-            <h2>Connected people</h2>
+            <h2>Users connected</h2>
             {users}
           </div>
         </div>

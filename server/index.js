@@ -1,16 +1,20 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const PORT = process.env.PORT || 8080;
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+  pingInterval: 10000,
+  pingTimeout: 5000
+});
+
 const bodyParser = require('body-parser');
 
 const users = [];
-let nickname = '';
+const allUsers = {};
 
 app.use(bodyParser.json());
 
 app.post('/api/user', (req, res) => {
-  nickname = req.body.nickname;
+  const nickname = req.body.nickname;
   console.log(nickname);
   if (nickname) {
     if (users.includes(nickname)) {
@@ -18,7 +22,7 @@ app.post('/api/user', (req, res) => {
     }
     else {
       users.push(nickname);
-      res.sendStatus(200);
+      res.status(200).send(users);
     }
   } else {
     res.sendStatus(400);
@@ -31,16 +35,23 @@ app.get('/api/user', (req, res) => {
 });
 
 io.on('connection', socket => {
-  console.log(`${nickname} connected`);
+
   socket.on('disconnect', function () {
-    const searchNickname = (element) => element === nickname;
+    const searchNickname = (element) => element === allUsers[socket.id];
     if (users.findIndex(searchNickname) >= 0) {
       users.splice(users.findIndex(searchNickname), 1);
-      console.log(`${nickname} disconnected`);
     }
-    console.log(users);
+    console.log(`${allUsers[socket.id]} disconnected`);
   });
+
+  socket.on('user', user => {
+    allUsers[socket.id] = user;
+    console.log(`${user} connected. Id: ${socket.id}`);
+    socket.emit('user', user);
+  });
+
   socket.on('message', msg => {
+    console.log(`User: ${socket.id} sent a message`);
     io.emit('message', msg);
   });
 });

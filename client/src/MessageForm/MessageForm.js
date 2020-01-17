@@ -1,16 +1,12 @@
 import React, { useEffect } from "react";
-import io from 'socket.io-client';
+import { socket } from '../socket';
 
 
-const MessageForm = ({messages, setMessages, nickname}) => {
+const MessageForm = ({ messages, setMessages, nickname }) => {
 
-  const socket = io('localhost:8080');
-
-  useEffect(() => {
-    socket.on('message', msg => {
-      setMessages([...messages, msg]);
-    });
-  }, [messages]);
+  socket.on('message', msg => {
+    setMessages([...messages, msg]);
+  });
 
   const sendMessage = (e) => {
     e.preventDefault();

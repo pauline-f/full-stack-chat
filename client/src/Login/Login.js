@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { addUser } from '../api';
+import { socket } from '../socket';
 
 const Login = ({ users, setUsers }) => {
 
@@ -17,6 +18,7 @@ const Login = ({ users, setUsers }) => {
       const result = await addUser({ nickname: e.target.user.value, isLogged: true });
       if (result.status === 200) {
         userContext.setUser({ nickname: e.target.user.value, isLogged: true });
+        socket.emit('user', e.target.user.value);
         setIsLog(true);
         console.log('Success, the user is connected');
       } else {
