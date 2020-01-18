@@ -1,32 +1,24 @@
-import React, { useEffect } from "react";
-import io from 'socket.io-client';
+import React from "react";
+import { socket } from '../socket';
 
 
-const MessageForm = props => {
+const MessageForm = ({ messages, setMessages }) => {
 
-  const socket = io('localhost:8080');
+  socket.on('message', msg => {
+    setMessages([...messages, msg]);
+  });
 
-  useEffect(() => {
-    socket.on('message', msg => {
-      props.setMessages([msg, ...props.messages]);
-    });
-  }, [props.messages])
-
-
-  const saveMessage = (e) => {
+  const sendMessage = (e) => {
     e.preventDefault();
     socket.emit('message', e.target.msg.value);
-    console.log(props.messages);
     e.target.msg.value = '';
   }
 
   return (
-    <div>
-      <form onSubmit={saveMessage}>
-        <input type='text' name='msg' />
-        <input type='submit' value='Send' />
-      </form>
-    </div>
+    <form onSubmit={sendMessage}>
+      <input type='text' name='msg' />
+      <input type='submit' value='Send' />
+    </form>
   );
 };
 
