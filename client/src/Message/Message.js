@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const Message = props => {
-  
+const Message = ({ message, user }) => {
+
   return (
     <div>
-      {props.message}
+      <p>{user}: {message}</p>
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React from "react";
 import { socket } from '../socket';
 
-
 const MessageForm = ({ messages, setMessages }) => {
 
-  socket.on('message', msg => {
-    setMessages([...messages, msg]);
+  socket.on('message', data => {
+    setMessages([...messages, data]);
   });
 
   const sendMessage = (e) => {

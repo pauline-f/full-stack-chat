@@ -39,7 +39,7 @@ io.on('connection', socket => {
 
   socket.on('message', msg => {
     console.log(`User: ${socket.id} sent a message`);
-    io.emit('message', msg);
+    io.emit('message', {message: msg, user: Object.keys(allUsers).find(key => allUsers[key] === socket.id)});
   });
 });
 
