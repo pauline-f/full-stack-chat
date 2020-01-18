@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import MessageForm from '../MessageForm';
 import ListMessages from '../ListMessages';
 import UserContext from '../context/UserContext';
+import { H1 } from "./Chat.styles";
 import UsersConnected from '../UsersConnected';
 
 const Chat = ({ messages, setMessages, users, setUsers }) => {
@@ -13,8 +14,7 @@ const Chat = ({ messages, setMessages, users, setUsers }) => {
     <div>
       {userContext.user ? (
         <div>
-          <h1>Chat</h1>
-          <h2>{userContext.user.nickname}</h2>
+          <H1>Chat</H1>
           <ListMessages messages={messages} />
           <MessageForm messages={messages} setMessages={setMessages} />
           <UsersConnected users={users} setUsers={setUsers} />

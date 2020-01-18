@@ -34,7 +34,6 @@ export const Wrapper = styled.div`
   display: flex;
   margin: auto;
   flex-direction: column;
-  justify-content: center;
   text-align: center;
 `;
 
