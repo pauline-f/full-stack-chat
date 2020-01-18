@@ -34,7 +34,7 @@ io.on('connection', socket => {
   socket.on('user', user => {
     allUsers[user] = socket.id;
     console.log(`${user} connected. Id: ${socket.id}`);
-    socket.emit('user', user);
+    io.emit('users', Object.keys(allUsers));
   });
 
   socket.on('message', msg => {
