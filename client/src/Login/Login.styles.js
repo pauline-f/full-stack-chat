@@ -35,6 +35,7 @@ export const Wrapper = styled.div`
   margin: auto;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 `;
 
 export const H4 = styled.h4`

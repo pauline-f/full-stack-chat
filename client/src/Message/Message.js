@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { Wrapper } from "./Message.styles";
 
 const Message = ({ message, user }) => {
 
   return (
-    <div>
-      <p>{user}: {message}</p>
-    </div>
+    <Wrapper>
+      <h4>{user}:</h4>
+      <p>{message}</p>
+    </Wrapper>
   );
 };
 

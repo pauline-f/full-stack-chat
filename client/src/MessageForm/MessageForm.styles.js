@@ -29,15 +29,9 @@ export const Form = styled.form`
   margin: auto;
   width: 300px;
   padding: 20px;
-`;
-
-export const Wrapper = styled.div`
-  display: flex;
-  margin: auto;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-export const H4 = styled.h4`
-  color: #b0003a;
+  position:absolute;
+  bottom:0px;
+  right:25%;
+  left:50%;
+  margin-left:-150px;
 `;
