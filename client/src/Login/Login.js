@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import UserContext from '../context/UserContext';
+import { Input, Button, Form, Wrapper, H4 } from "./Login.styles";
 import { addUser } from '../api';
 import { socket } from '../socket';
 
@@ -37,16 +38,15 @@ const Login = () => {
     <>
       {
         isLogged
-          ? (
-            <Redirect to={{pathname: '/chat'}} />
-          ) : (
-            <div>
-              <form onSubmit={saveUser}>
-                Nickname: <input type='text' name='user' />
-                <input type='submit' value='Connect' />
-              </form>
-              <h5>{error}</h5>
-            </div>
+          ? (<Redirect to={{ pathname: '/chat' }} />) : (
+            <Wrapper>
+              <h1>Chat application</h1>
+              <Form onSubmit={saveUser}>
+                <Input type='text' name='user' placeholder='Your nickname' />
+                <Button type='submit' value='Connect' />
+              </Form>
+              <H4>{error}</H4>
+            </Wrapper>
           )
       }
     </>
