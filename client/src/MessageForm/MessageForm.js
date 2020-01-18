@@ -1,4 +1,5 @@
 import React from "react";
+import { Input, Button, Form } from "./MessageForm.styles";
 import { socket } from '../socket';
 
 const MessageForm = ({ messages, setMessages }) => {
@@ -14,10 +15,10 @@ const MessageForm = ({ messages, setMessages }) => {
   }
 
   return (
-    <form onSubmit={sendMessage}>
-      <input type='text' name='msg' />
-      <input type='submit' value='Send' />
-    </form>
+    <Form onSubmit={sendMessage}>
+      <Input type='text' name='msg' placeholder='Type a message' />
+      <Button type='submit' value='Send' />
+    </Form>
   );
 };
 
