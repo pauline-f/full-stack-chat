@@ -8,44 +8,31 @@ const io = require('socket.io')(http, {
 
 const bodyParser = require('body-parser');
 
-const users = [];
 const allUsers = {};
 
 app.use(bodyParser.json());
 
 app.post('/api/user', (req, res) => {
   const nickname = req.body.nickname;
-  console.log(nickname);
   if (nickname) {
-    if (users.includes(nickname)) {
+    if (allUsers[nickname]) {
       res.sendStatus(400);
-    }
-    else {
-      users.push(nickname);
-      res.status(200).send(users);
+    } else {
+      allUsers[nickname] = '';
+      res.sendStatus(200);
     }
   } else {
     res.sendStatus(400);
   }
-  console.log(users);
-});
-
-app.get('/api/user', (req, res) => {
-  res.send(users);
 });
 
 io.on('connection', socket => {
-
   socket.on('disconnect', function () {
-    const searchNickname = (element) => element === allUsers[socket.id];
-    if (users.findIndex(searchNickname) >= 0) {
-      users.splice(users.findIndex(searchNickname), 1);
-    }
     console.log(`${allUsers[socket.id]} disconnected`);
   });
 
   socket.on('user', user => {
-    allUsers[socket.id] = user;
+    allUsers[user] = socket.id;
     console.log(`${user} connected. Id: ${socket.id}`);
     socket.emit('user', user);
   });

@@ -4,9 +4,9 @@ import UserContext from '../context/UserContext';
 import { addUser } from '../api';
 import { socket } from '../socket';
 
-const Login = ({ users, setUsers }) => {
+const Login = () => {
 
-  const [isLog, setIsLog] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const [error, setError] = useState('');
   const userContext = useContext(UserContext);
 
@@ -15,11 +15,11 @@ const Login = ({ users, setUsers }) => {
     e.persist();
 
     try {
-      const result = await addUser({ nickname: e.target.user.value, isLogged: true });
+      const result = await addUser({ nickname: e.target.user.value });
       if (result.status === 200) {
-        userContext.setUser({ nickname: e.target.user.value, isLogged: true });
         socket.emit('user', e.target.user.value);
-        setIsLog(true);
+        userContext.setUser(e.target.user.value);
+        setIsLogged(true);
         console.log('Success, the user is connected');
       } else {
         if (result.status === 400) {
@@ -31,20 +31,14 @@ const Login = ({ users, setUsers }) => {
     } catch (error) {
       console.error('Error:', error);
     }
-    console.log('login', userContext.user);
   }
 
   return (
     <>
       {
-        isLog
+        isLogged
           ? (
-            <Redirect
-              to={{
-                pathname: '/chat',
-                state: { nickname: userContext.user.nickname }
-              }}
-            />
+            <Redirect to={{pathname: '/chat'}} />
           ) : (
             <div>
               <form onSubmit={saveUser}>

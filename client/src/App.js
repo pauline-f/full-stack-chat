@@ -11,8 +11,6 @@ function App() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
 
-  console.log('app', user);
-
   return (
     <UserProvider value={{ user, setUser }}>
       <div className="App">

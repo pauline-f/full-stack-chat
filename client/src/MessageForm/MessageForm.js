@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { socket } from '../socket';
 
 
-const MessageForm = ({ messages, setMessages, nickname }) => {
+const MessageForm = ({ messages, setMessages }) => {
 
   socket.on('message', msg => {
     setMessages([...messages, msg]);
@@ -11,18 +11,14 @@ const MessageForm = ({ messages, setMessages, nickname }) => {
   const sendMessage = (e) => {
     e.preventDefault();
     socket.emit('message', e.target.msg.value);
-    console.log(messages);
     e.target.msg.value = '';
   }
 
   return (
-    <div>
-      <h4>{nickname}</h4>
-      <form onSubmit={sendMessage}>
-        <input type='text' name='msg' />
-        <input type='submit' value='Send' />
-      </form>
-    </div>
+    <form onSubmit={sendMessage}>
+      <input type='text' name='msg' />
+      <input type='submit' value='Send' />
+    </form>
   );
 };
 
