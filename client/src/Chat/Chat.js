@@ -16,6 +16,10 @@ const Chat = ({ messages, setMessages, users, setUsers }) => {
     setMessages([...messages, data]);
   })
 
+  socket.on('userConnect', (data) => {
+    setMessages([...messages, data]);
+  })
+
   return (
     <div>
       {userContext.user ? (

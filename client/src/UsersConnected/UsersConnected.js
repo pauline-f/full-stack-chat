@@ -15,7 +15,7 @@ const UsersConnected = ({ users, setUsers }) => {
     <Wrapper height={window.innerHeight}>
       Users Connected
       <ul>
-        {users.map(user => <li>{user === userContext.user ? `${user} (you)` : user}</li>)}
+        {users.map((user, i) => <li key={i}>{user === userContext.user ? `${user} (you)` : user}</li>)}
       </ul>
     </Wrapper>
   );

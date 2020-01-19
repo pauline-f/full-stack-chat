@@ -38,6 +38,7 @@ io.on('connection', socket => {
   socket.on('user', user => {
     allUsers[user] = socket.id;
     console.log(`${user} connected. Id: ${socket.id}`);
+    socket.broadcast.emit('userConnect', {message: `${user} joined the chat`});
     io.emit('users', Object.keys(allUsers));
   });
 
