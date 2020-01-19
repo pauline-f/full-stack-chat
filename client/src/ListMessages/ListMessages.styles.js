@@ -6,5 +6,8 @@ export const Wrapper = styled.div`
   position: relative;
   align-items: flex-start;
   width: 300px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
+  overflow-y: auto; 
 `;

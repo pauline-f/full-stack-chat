@@ -10,7 +10,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.input`
-  background-color: #e91e63;
+  background-color: #c2185b;
   color: white;
   cursor: pointer;
   border-radius: 4px;
@@ -20,7 +20,7 @@ export const Button = styled.input`
   width: 70px;
   margin-left: 10px;
   :hover {
-    background-color: #b0003a;
+    background-color: #8c0032;
   }
 `;
 
@@ -31,7 +31,4 @@ export const Form = styled.form`
   padding: 20px;
   position:absolute;
   bottom:0px;
-  right:25%;
-  left:50%;
-  margin-left:-150px;
 `;

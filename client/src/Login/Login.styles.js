@@ -10,7 +10,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.input`
-  background-color: #e91e63;
+  background-color: #c2185b;
   color: white;
   cursor: pointer;
   border-radius: 4px;
@@ -18,7 +18,7 @@ export const Button = styled.input`
   font-size: 1rem;
   padding: 8px;
   :hover {
-    background-color: #b0003a;
+    background-color: #8c0032;
   }
 `;
 

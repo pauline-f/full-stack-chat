@@ -14,12 +14,12 @@ const Chat = ({ messages, setMessages, users, setUsers }) => {
     <div>
       {userContext.user ? (
         <Wrapper>
+          <UsersConnected users={users} setUsers={setUsers} />
           <MessageWrapper>
             <H1>Chat</H1>
             <ListMessages messages={messages} />
-          </MessageWrapper>
             <MessageForm messages={messages} setMessages={setMessages} />
-          <UsersConnected users={users} setUsers={setUsers} />
+          </MessageWrapper>
         </Wrapper>
       ) : (
           <Redirect

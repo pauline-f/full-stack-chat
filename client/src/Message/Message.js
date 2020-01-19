@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Wrapper } from "./Message.styles";
+import { Wrapper, Username } from "./Message.styles";
 import UserContext from '../context/UserContext';
 
 const Message = ({ message, user }) => {
@@ -14,7 +14,7 @@ const Message = ({ message, user }) => {
         </div>
       ) : (
           <div>
-            <h4>{user}:</h4>
+            <Username>{user}:</Username>
             <p>{message}</p>
           </div>
         )}
