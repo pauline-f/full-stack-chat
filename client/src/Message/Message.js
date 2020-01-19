@@ -14,7 +14,7 @@ const Message = ({ message, user }) => {
         </div>
       ) : (
           <div>
-            <Username>{user}:</Username>
+            {user ? <Username>{user}:</Username> : null}
             <p>{message}</p>
           </div>
         )}

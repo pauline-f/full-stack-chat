@@ -28,7 +28,11 @@ app.post('/api/user', (req, res) => {
 
 io.on('connection', socket => {
   socket.on('disconnect', function () {
-    console.log(`${allUsers[socket.id]} disconnected`);
+    const user = Object.keys(allUsers).find(key => allUsers[key] === socket.id);
+    console.log(`${user} disconnected`);
+    delete allUsers[user];
+    io.emit('userDisconnect', {message: `${user} left the chat`});
+    io.emit('users', Object.keys(allUsers));
   });
 
   socket.on('user', user => {

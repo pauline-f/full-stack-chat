@@ -5,10 +5,16 @@ import ListMessages from '../ListMessages';
 import UserContext from '../context/UserContext';
 import { H1, Wrapper, MessageWrapper } from "./Chat.styles";
 import UsersConnected from '../UsersConnected';
+import Logout from '../Logout';
+import { socket } from '../socket';
 
 const Chat = ({ messages, setMessages, users, setUsers }) => {
 
   const userContext = useContext(UserContext);
+
+  socket.on('userDisconnect', (data) => {
+    setMessages([...messages, data]);
+  })
 
   return (
     <div>
@@ -20,6 +26,7 @@ const Chat = ({ messages, setMessages, users, setUsers }) => {
             <ListMessages messages={messages} />
             <MessageForm messages={messages} setMessages={setMessages} />
           </MessageWrapper>
+          <Logout />
         </Wrapper>
       ) : (
           <Redirect

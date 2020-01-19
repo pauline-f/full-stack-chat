@@ -1,3 +1,7 @@
 import io from 'socket.io-client';
 
-export const socket = io('localhost:8080');
+export let socket = io('localhost:8080');
+
+export const resetSocket = () => {
+  socket = io('localhost:8080');
+};
