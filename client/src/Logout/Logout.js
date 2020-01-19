@@ -5,13 +5,14 @@ import { socket, resetSocket } from '../socket';
 import UserContext from '../context/UserContext';
 
 
-const Logout = () => {
+const Logout = ({ setMessages }) => {
 
   const userContext = useContext(UserContext);
 
   const logout = () => {
     socket.disconnect();
     resetSocket();
+    setMessages([]);
     userContext.setUser(null);
   }
 

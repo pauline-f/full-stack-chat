@@ -6,11 +6,18 @@ import UserContext from '../context/UserContext';
 import { H1, Wrapper, MessageWrapper } from "./Chat.styles";
 import UsersConnected from '../UsersConnected';
 import Logout from '../Logout';
-import { socket } from '../socket';
+import { socket, resetSocket } from '../socket';
 
 const Chat = ({ messages, setMessages, users, setUsers }) => {
 
   const userContext = useContext(UserContext);
+
+  socket.on('disconnect', () => {
+    console.log('Server connection lost');
+    resetSocket();
+    setMessages([]);
+    userContext.setUser(null);
+  })
 
   socket.on('userDisconnect', (data) => {
     setMessages([...messages, data]);
@@ -30,7 +37,7 @@ const Chat = ({ messages, setMessages, users, setUsers }) => {
             <ListMessages messages={messages} />
             <MessageForm messages={messages} setMessages={setMessages} />
           </MessageWrapper>
-          <Logout />
+          <Logout setMessages={setMessages} />
         </Wrapper>
       ) : (
           <Redirect
